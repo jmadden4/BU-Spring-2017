@@ -1,6 +1,10 @@
-def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
-    server_address = ('localhost', 8000)
-    httpd = server_class(server_address, handler_class)
+import http.server
+import socketserver
+
+PORT = 8000
+
+Handler = http.server.SimpleHTTPRequestHandler
+
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print("serving at port", PORT)
     httpd.serve_forever()
-	
-	
